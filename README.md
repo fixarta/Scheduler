@@ -14,7 +14,12 @@ Hence, we are getting to separate queues of scheduled job executed.
 - ensures app operations are being executed asynchronously even when gas price is too high or trx is being proceeded too long.
 
 ### Implementing
-You can implement Fixarta scheduler model into your data structure by
+You can implement Fixarta scheduler model into your data structure by creating two objects in the Firestore database: 'products' and 'brands'
+Both objects needs to contain 'status' field
+If this field is 'queue', it will be processed by the scheduler. first all brands, then all products, one item per run.
+Resulting status will be:
+- done - if all is good, in this case object will have address field representing the address in the blockchain
+- fail - if something went wrong. In this case, object will have the 'error' field with the error explanation
 
 ## Fixarta usage example
 1. Checking the status of a specific brand or its products to start proceed
